@@ -101,7 +101,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama Level</label>
                             <input type="text" name="level" id="level" class="form-control" required
-                                placeholder="Masukkan Level">
+                                value="{{ old('level') }}" placeholder="Masukkan Level">
                         </div>
                     </div>
                     <div class="modal-footer">

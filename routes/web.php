@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('home');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // Menu Levels
     Route::get('/menu-levels', [App\Http\Controllers\MenuLevelController::class, 'index'])->name('menu-level');
@@ -33,4 +33,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/menus/edit/{id}', [App\Http\Controllers\MenuController::class, 'edit'])->name('menu-edit');
     Route::put('/menus/update/{id}', [App\Http\Controllers\MenuController::class, 'update'])->name('menu-update');
     Route::delete('/menus/delete/{id}', [App\Http\Controllers\MenuController::class, 'destroy'])->name('menu-delete');
+
+    // User
+    Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('user');
+    Route::get('/users/create', [App\Http\Controllers\UserController::class, 'create'])->name('user-create');
+    Route::post('/users/create', [App\Http\Controllers\UserController::class, 'store'])->name('user-post');
+    Route::get('/users/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user-edit');
+    Route::put('/users/update/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('user-update');
+    Route::put('/users/update/password/{id}', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user-change-password');
+    Route::delete('/users/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user-delete');
+
+    // Logs
+    Route::get('/logs', [App\Http\Controllers\LogController::class, 'index'])->name('log');
+
+    // Activity
+    Route::get('/activities', [App\Http\Controllers\UserController::class, 'activity'])->name('user-activity');
 });

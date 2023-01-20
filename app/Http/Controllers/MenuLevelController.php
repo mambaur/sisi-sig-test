@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MenuLevel;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -31,6 +32,12 @@ class MenuLevelController extends Controller
             "level" => $request->level
         ]);
 
+        UserActivity::create([
+            "user_id" => auth()->user()->id,
+            "deskripsi" => "Menambahkan Menu Level baru dengan nama " . $request->level,
+            "created_by" => auth()->user()->id
+        ]);
+
         Alert::success('Berhasil', 'Menu level berhasil ditambahkan');
         return back();
     }
@@ -48,6 +55,12 @@ class MenuLevelController extends Controller
             "level" => $request->level
         ]);
 
+        UserActivity::create([
+            "user_id" => auth()->user()->id,
+            "deskripsi" => "Mengupdate Menu Level " . $request->level,
+            "created_by" => auth()->user()->id
+        ]);
+
         Alert::success('Berhasil', 'Menu level berhasil diupdate');
         return back();
     }
@@ -60,6 +73,14 @@ class MenuLevelController extends Controller
      */
     public function destroy($id)
     {
+        $level = MenuLevel::find($id);
+
+        UserActivity::create([
+            "user_id" => auth()->user()->id,
+            "deskripsi" => "Menghapus Menu Level " . $level->level,
+            "created_by" => auth()->user()->id
+        ]);
+
         MenuLevel::destroy($id);
         Alert::success('Berhasil', 'Menu level berhasil dihapus');
         return back();

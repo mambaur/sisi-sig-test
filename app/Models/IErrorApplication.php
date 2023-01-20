@@ -13,4 +13,9 @@ class IErrorApplication extends Model
     protected $guarded = [];
 
     protected $table = 'i_error_application';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

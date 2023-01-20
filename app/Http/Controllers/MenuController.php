@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\MenuLevel;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -69,6 +71,12 @@ class MenuController extends Controller
             "parent_id" => $request->parent_id,
             "created_by" => auth()->user()->id,
             "updated_by" => auth()->user()->id
+        ]);
+
+        UserActivity::create([
+            "user_id" => auth()->user()->id,
+            "deskripsi" => "Menambahkan menu baru dengan nama " . $request->menu_name,
+            "created_by" => auth()->user()->id
         ]);
 
         Alert::success('Berhasil', 'Menu berhasil ditambahkan');
@@ -147,6 +155,12 @@ class MenuController extends Controller
             "updated_by" => auth()->user()->id
         ]);
 
+        UserActivity::create([
+            "user_id" => auth()->user()->id,
+            "deskripsi" => "Mengupdate menu " . $request->menu_name,
+            "created_by" => auth()->user()->id
+        ]);
+
         Alert::success('Berhasil', 'Menu berhasil diupdate');
         return redirect()->route('menu');
     }
@@ -166,10 +180,20 @@ class MenuController extends Controller
             return back();
         }
 
+        DB::beginTransaction();
+
+        UserActivity::create([
+            "user_id" => auth()->user()->id,
+            "deskripsi" => "Menghapus menu " . $menu->menu_name,
+            "created_by" => auth()->user()->id
+        ]);
+
         if (@$menu->menu_icon) {
             Storage::delete(@$menu->menu_icon);
         }
         Menu::destroy($id);
+
+        DB::commit();
 
         Alert::success('Berhasil', 'Menu berhasil dihapus');
         return redirect()->route('menu');

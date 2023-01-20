@@ -38,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function photos()
+    {
+        return $this->hasMany(UserFoto::class, 'user_id');
+    }
+
+    public function menus()
+    {
+        return $this->hasMany(MenuUser::class, 'user_id');
+    }
 }

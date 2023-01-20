@@ -34,6 +34,7 @@
                                         <div class="form-group">
                                             <label for="menu_name">Nama Menu</label>
                                             <input type="text" name="menu_name" id="menu_name"
+                                                value="{{ old('menu_name') }}"
                                                 class="form-control @error('menu_name') is-invalid @enderror"
                                                 placeholder="Masukkan Nama Menu">
                                             @error('menu_name')
@@ -68,7 +69,7 @@
                                         <div class="form-group">
                                             <label for="menu_link">Link Menu</label>
                                             <input type="text" name="menu_link" id="menu_link" class="form-control"
-                                                placeholder="Masukkan Link Menu">
+                                                value="{{ old('menu_link') }}" placeholder="Masukkan Link Menu">
                                         </div>
                                         <div class="form-group">
                                             <label for="menu_icon">Menu icon</label>

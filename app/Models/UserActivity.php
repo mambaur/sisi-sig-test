@@ -13,4 +13,14 @@ class UserActivity extends Model
     protected $guarded = [];
 
     protected $table = 'user_activity';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class, 'menu_id');
+    }
 }
