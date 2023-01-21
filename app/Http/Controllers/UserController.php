@@ -149,7 +149,8 @@ class UserController extends Controller
         ]);
 
         Alert::success('Berhasil', 'Password berhasil diupdate');
-        return redirect()->route('user');
+        // return redirect()->route('user');
+        return back();
     }
 
     /**
@@ -258,7 +259,8 @@ class UserController extends Controller
         DB::commit();
 
         Alert::success('Berhasil', 'User berhasil diupdate');
-        return redirect()->route('user');
+        return back();
+        // return redirect()->route('user');
     }
 
     /**

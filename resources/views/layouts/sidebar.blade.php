@@ -85,7 +85,7 @@
                 </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('user-edit', [auth()->user()->id]) }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <img src="https://cdn-icons-png.flaticon.com/512/9055/9055398.png" class="nav-icon">
                         <p>
                             Edit Profile
                         </p>
@@ -96,7 +96,7 @@
                         onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();"
                         class="nav-link">
-                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <img src="https://cdn-icons-png.flaticon.com/512/4034/4034536.png" class="nav-icon">
                         <p>
                             Logout
                         </p>

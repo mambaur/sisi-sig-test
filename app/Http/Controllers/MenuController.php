@@ -141,7 +141,9 @@ class MenuController extends Controller
 
         $pathimage = $menu->menu_icon;
         if ($request->hasFile('menu_icon')) {
-            Storage::delete(@$menu->menu_icon);
+            if (@$menu->menu_icon) {
+                Storage::delete(@$menu->menu_icon);
+            }
             $image = $request->file('menu_icon');
             $pathimage = $image->store('menu_icon');
         }
